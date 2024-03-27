@@ -44,17 +44,47 @@
                 </div>
             </div>
 
+            <div class="role ">
+                <span class="item-title">Chức vụ:</span>
+                <br>
+                <div class="radio-button-group radio-button-group2" id="valueRole" datatype="number" value="0">
+                    <button class="radio-button" value="1" label="0">
+                        <div class="radio-button-check"></div>
+                        <div class="radio-button-focus"></div>
+                    </button>
+                    <p>Không</p>
+                    <button class="radio-button" value="0" label="1">
+                        <div class="radio-button-check"></div>
+                        <div class="radio-button-focus"></div>
+                    </button>
+                    <p>Nhân viên y tế</p>
+                    <button class="radio-button" value="0" label="2">
+                        <div class="radio-button-check"></div>
+                        <div class="radio-button-focus"></div>
+                    </button>
+                    <p>Quản lý</p>
+                </div>
+            </div>
 
             <div class="unit">
                 <span class="item-title">Địa phương:</span>
                 <div class="row">
                     <div class="form-item divide-1-row">
                         <div class="radio-button-group radio-button-group2" id="checkUnit" datatype="string" value="ward">
-                   
+                            <button class="radio-button" value="0" id="checkProvince" label="province">
+                                <div class="radio-button-check"></div>
+                                <div class="radio-button-focus"></div>
+                            </button>
                             <p>Tỉnh, thành phố:</p>
-            
+                            <button class="radio-button" value="0" id="checkDistrict" label="district">
+                                <div class="radio-button-check"></div>
+                                <div class="radio-button-focus"></div>
+                            </button>
                             <p>Quận, huyện:</p>
-          
+                            <button class="radio-button" value="1" id="checkWard" label="ward">
+                                <div class="radio-button-check"></div>
+                                <div class="radio-button-focus"></div>
+                            </button>
                             <p>Xã, phường:</p>
                         </div>
                     </div>
