@@ -30,9 +30,9 @@ class ManagerApproveAccount extends Base {
                 this.loadListAccount(this.mode);
             }
         });
-        document.querySelector('#btnRefresh').addEventListener('click',()=>{
+        document.querySelector('#btnRefresh').addEventListener('click', () => {
             document.querySelector(".search-box").value = '';
-            this.index =0;
+            this.index = 0;
             this.loadListAccount(this.mode);
         })
     }
@@ -89,7 +89,7 @@ class ManagerApproveAccount extends Base {
     }
 
     tableRowOnDBClick(item, thisTr) {
-        var popupBtns = [{ text: "Đóng", enable: true }, { text: "Duyệt", enable: true }, { text: "Từ chối", enable: true }]
+        var popupBtns = [{ text: "Đóng", enable: true }, { text: "Duyệt", enable: true }, { text: "Từ chối", enable: true }, { text: "File chứng chỉ", enable: true }]
         var btns = showPopupDialog("Thông báo", "Bạn có muốn duyệt tài khoản " + item.phoneNumber + " không?", popupBtns);
         btns[0].addEventListener('click', () => {
             hidePopupDialog();
@@ -123,6 +123,15 @@ class ManagerApproveAccount extends Base {
                 console.log(error);
                 showToastMessenger('danger', "Từ chối thất bại. Vui lòng thử lại sau!");
             })
+        });
+        btns[3].addEventListener('click', () => {
+            const a = document.createElement("a");
+            a.href = `https://firebasestorage.googleapis.com/v0/b/pandemic-management-1f2fd.appspot.com/o/${item.phoneNumber}.png?alt=media`;
+            a.setAttribute("download", `${item.phoneNumber}.png`);
+            a.setAttribute("target", "_blank");
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
         });
     }
 

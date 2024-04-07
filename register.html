@@ -70,7 +70,8 @@
                 <span class="item-title">Địa phương:</span>
                 <div class="row">
                     <div class="form-item divide-1-row">
-                        <div class="radio-button-group radio-button-group2" id="checkUnit" datatype="string" value="ward">
+                        <div class="radio-button-group radio-button-group2" id="checkUnit" datatype="string"
+                            value="ward">
                             <button class="radio-button" value="0" id="checkProvince" label="province">
                                 <div class="radio-button-check"></div>
                                 <div class="radio-button-focus"></div>
@@ -91,7 +92,7 @@
                 </div>
                 <div class="row">
                     <div class="form-item divide-3-row">
-                        <div id="valueProvince" type="Province" class="combobox" >
+                        <div id="valueProvince" type="Province" class="combobox">
                             <input type="text" class="input">
                             <i class="fas fa-angle-down"></i>
                         </div>
@@ -107,6 +108,12 @@
                             <input type="text" class="input">
                             <i class="fas fa-angle-down"></i>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-item divide-1-row">
+                        <b>Tài liệu/chứng chỉ</b>
+                        <input type="file" name="" id="valueFile">
                     </div>
                 </div>
             </div>
@@ -133,6 +140,8 @@
 
     <script>
     </script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-storage.js"></script>
     <script src="./js/common/common.js"></script>
     <script src="./api/BaseApi.js"></script>
     <script src="./api/UnitApi.js"></script>

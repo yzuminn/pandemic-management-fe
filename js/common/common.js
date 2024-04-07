@@ -376,6 +376,9 @@ function showPopupDialog(title, content, buttons) {
     var btn1 = parseHTML(`<button class="button button-secondary" id="btn1">${buttons[0].text}</button>`);
     var btn2 = parseHTML(`<button class="button button-primary" id="btn2">${buttons[1].text}</button>`);
     var btn3 = parseHTML(`<button class="button button-secondary" id="btn3">${buttons[2].text}</button>`);
+    if (buttons.length == 4) {
+        var btn4 = parseHTML(`<button class="button button-secondary" id="btn3"><i class="fas fa-file-arrow-down"></i></button>`);
+    }
     if (!buttons[0].enable) {
         btn1.classList.add('d-none');
     }
@@ -387,6 +390,9 @@ function showPopupDialog(title, content, buttons) {
     }
     let span1 = parseHTML(`<span></span>`);
     span1.append(btn1);
+    if (buttons.length == 4) {
+        span1.append(btn4);
+    }
     let span2 = parseHTML(`<span></span>`);
     span2.append(btn2);
     span2.append(btn3);
@@ -397,7 +403,11 @@ function showPopupDialog(title, content, buttons) {
     popup.append(popupBody);
     popup.append(popupFooter);
     document.body.appendChild(popup);
-    return [btn1, btn2, btn3];
+    if (buttons.length == 4) {
+        return [btn1, btn2, btn3, btn4];
+    } else {
+        return [btn1, btn2, btn3];
+    }
 }
 
 function hidePopupDialog() {
@@ -429,13 +439,13 @@ function formatDate(_date) {
 const cipher = salt => {
     const textToChars = text => text.split('').map(c => c.charCodeAt(0));
     const byteHex = n => ("0" + Number(n).toString(16)).substr(-2);
-    const applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code);
+    const applySaltToChar = code => textToChars(salt).reduce((a, b) => a ^ b, code);
 
     return text => text.split('')
-      .map(textToChars)
-      .map(applySaltToChar)
-      .map(byteHex)
-      .join('');
+        .map(textToChars)
+        .map(applySaltToChar)
+        .map(byteHex)
+        .join('');
 }
 
 if (document.querySelector('.btn-showqr')) {
@@ -449,7 +459,7 @@ if (document.querySelector('.btn-showqr')) {
     })
 }
 
-function showUnitQr(unitCode){
+function showUnitQr(unitCode) {
     var data = `https://hieunv183534.github.io/covidmanagement/page/qrcode/unit-info.html?unitCode=${unitCode}`;
     showQrCode(data);
 }
@@ -464,7 +474,7 @@ function showQrCode(data) {
                                     <img src="https://api.qrserver.com/v1/create-qr-code/?data=${data}&size=300x300" alt="">
                                 </div>`);
     qr.append(qrContent);
-    qr.addEventListener('click',()=>{
+    qr.addEventListener('click', () => {
         qr.remove();
     })
     document.body.appendChild(qr);
