@@ -436,48 +436,5 @@ function formatDate(_date) {
 }
 //-----------qr code---------------------------------------------------------------------------------------------------
 
-const cipher = salt => {
-    const textToChars = text => text.split('').map(c => c.charCodeAt(0));
-    const byteHex = n => ("0" + Number(n).toString(16)).substr(-2);
-    const applySaltToChar = code => textToChars(salt).reduce((a, b) => a ^ b, code);
-
-    return text => text.split('')
-        .map(textToChars)
-        .map(applySaltToChar)
-        .map(byteHex)
-        .join('');
-}
-
-if (document.querySelector('.btn-showqr')) {
-    document.querySelector('.btn-showqr').addEventListener('click', () => {
-        var phoneNumber = sessionStorage.getItem('phoneNumber');
-        const myCipher = cipher('mySecretSalt')
-        var phoneEncrypt = myCipher(phoneNumber);
-        console.log(phoneEncrypt);
-        var data = `https://hieunv183534.github.io/covidmanagement/page/qrcode/user-info.html?phoneNumber=${phoneEncrypt}`;
-        showQrCode(data);
-    })
-}
-
-function showUnitQr(unitCode) {
-    var data = `https://hieunv183534.github.io/covidmanagement/page/qrcode/unit-info.html?unitCode=${unitCode}`;
-    showQrCode(data);
-}
-
-function showQrCode(data) {
-    console.log(data);
-    var qr = parseHTML(`<div class="qr">
-                            <div class="qr-modal"></div>
-                            
-                        </div>`);
-    var qrContent = parseHTML(`<div class="qr-content">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=${data}&size=300x300" alt="">
-                                </div>`);
-    qr.append(qrContent);
-    qr.addEventListener('click', () => {
-        qr.remove();
-    })
-    document.body.appendChild(qr);
-}
 //-------------------------------------------------------------------------------------------------------------------------------
 
