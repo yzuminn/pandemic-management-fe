@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../lib/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/layout/main-layout.css">
+    <link rel="stylesheet" href="../../css/layout/cilivian-epidemic-situation.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="menu-header">
+            <i class="fas fa-shield-virus"></i>
+            <h5>ANTI COVID</h5>
+        </div>
+        <div class="menu-body">
+            <div id="cilivianHome" class="menu-item" toHref="medicalstaff-home" title="Trang chủ">
+                <i class="fas fa-home"></i>
+                <p>Trang chủ</p>
+            </div>
+            <div id="cilivianFeed" class="menu-item" toHref="medicalstaff-feed" title="Thông tin">
+                <i class="fas fa-newspaper"></i>
+                <p>Thông tin</p>
+            </div>
+            <div id="cilivianFeed" class="menu-item" toHref="medicalstaff-declaration-list" title="Danh sách khai báo y tế">
+                <i class="fas fa-list-alt"></i>
+                <p>Khai báo y tế</p>
+            </div>
+            <div id="cilivianSituation" class="menu-item" toHref="medicalstaff-epidemic-situation"
+                title="Tình hình dịch bệnh">
+                <i class="fas fa-globe-asia"></i>
+                <p>Tình hình dịch</p>
+            </div>
+            <div id="cilivianMap" class="menu-item menu-item-active" toHref="medicalstaff-map">
+                <i class="fas fa-map"></i>
+                <p>Bản đồ dịch</p>
+            </div>
+            <a class="menu-item" href="https://dynamic-form-declare.netlify.app/">
+                <i class="fas fa-question"></i>
+                <p>Khai báo động</p>
+            </a>
+        </div>
+        <div class="toggle-menu">
+            <i class="fas fa-angle-left"></i>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-header">
+            <div class="content-header-left">
+                <i class="fas fa-user"></i>
+                <h2>|</h2>
+                <h2 id="unitDetail"></h2>
+            </div>
+            <div class="content-header-right">
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <button class="user">
+                    <div class="avatar"></div>
+                    <p class="display-user">Nguyễn Văn Hiếu</p>
+                    <i class="fas fa-angle-down"></i>
+                </button>
+                <div class="list-option">
+                    <div class="item-option">Chỉnh sửa thông tin</div>
+                    <div class="item-option">Hotline</div>
+                    <div class="item-option">About me</div>
+                    <div class="item-option btn-showqr">QR Code</div>
+                    <div class="item-option btn-logout">Đăng xuất</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <div id="map" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+
+
+    <span id="thisIsListUnit" style="display: none;"></span>
+
+    <div class="data-list">
+    </div>
+
+
+    <div class="toast-messenger" type="success" isShow="hide">
+        <i class="mes-icon fas fa-exclamation-circle"></i>
+        <i class="mes-icon fas fa-check-circle"></i>
+        <div class="mes-text">Thêm mới thành công</div>
+    </div>
+
+    <div class="loader" isShow="hide">
+        <div class="loader-modal"></div>
+        <div class="loader-icon"></div>
+    </div>
+
+    <div class="data-list">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
+        integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="../../js/model/tableColums.js"></script>
+    <script src="../../js/common/common.js"></script>
+    <script src="../../api/BaseApi.js"></script>
+    <script src="../../api/UnitApi.js"></script>
+    <script src="../../js/page/base.js"></script>
+    <script src="../../js/province-geojson.js"></script>
+    <script src="../../js/page/cilivian/cilivianMap.js"></script>
+</body>
+
+</html>
