@@ -173,13 +173,13 @@ class ManagerEpidemicSituation extends Base {
     var popupBtns = [
       { text: "Đóng", enable: true },
       { text: "Xem", enable: true },
-      { text: "QR Code", enable: true },
+      { text: "Biểu đồ thống kê", enable: true },
     ];
     var btns = showPopupDialog(
       "Thông báo",
       "Bạn có muốn xem tình hình dịch các đơn vị con của đơn vị " +
-        item.unitName +
-        " không?",
+      item.unitName +
+      " không?",
       popupBtns
     );
     btns[0].addEventListener("click", () => {
@@ -188,7 +188,7 @@ class ManagerEpidemicSituation extends Base {
     btns[1].addEventListener("click", () => {
       hidePopupDialog();
       if (item.type == "w") {
-        showToastMessenger("danger", "Đây đã là đơn vị cấp nhỏ nhất!!");
+        showToastMessenger("danger", "Đây đã là đơn vị cấp nhỏ nhất!");
       } else {
         this.unitCode = item.unitCode;
         document.querySelector(".search-box").value = "";
@@ -197,7 +197,7 @@ class ManagerEpidemicSituation extends Base {
       }
     });
     btns[2].addEventListener("click", () => {
-      showUnitQr(item.unitCode);
+      window.location.href = "./chart.html?unitCode=" + item.unitCode;
     });
   }
 }

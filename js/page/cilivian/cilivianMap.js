@@ -95,6 +95,11 @@ class MyMap extends Base {
                 <td>Mức độ cảnh báo</td>
                 <td>${provinceInfo.warningLevel}</td>
             </tr>
+            <tr>
+                <td>
+                    <a href="./chart.html?unitCode=${provinceInfo.unitCode}">Biểu đồ dịch</a>
+                </td>
+            </tr>
         </table>`
     }
 }
