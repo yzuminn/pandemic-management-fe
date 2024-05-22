@@ -1,5 +1,28 @@
 managerEpidemicSituation = null;
 
+const firebaseConfig = {
+    apiKey: "AIzaSyAKWLInk3HEpmsL438LX41LXuVYROs_DYE",
+    authDomain: "pandemic-management-1f2fd.firebaseapp.com",
+    projectId: "pandemic-management-1f2fd",
+    storageBucket: "pandemic-management-1f2fd.appspot.com",
+    messagingSenderId: "60561382808",
+    appId: "1:60561382808:web:f3977c82b16d6310ca5fed",
+    measurementId: "G-TR2HC0H8SP"
+};
+
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
+db.collection("your-collection-name").get().then((querySnapshot) => {
+    var docsData = [];
+    querySnapshot.forEach((doc) => {
+        docsData.push(doc.data());
+    });
+    return docsData;
+}).then(res => {
+    console.log(res);
+})
+
 window.onload = () => {
     unitApi = new UnitApi();
     managerEpidemicSituation = new ManagerEpidemicSituation();
@@ -17,19 +40,19 @@ class ManagerEpidemicSituation extends Base {
         this.loadListUnit(this.unitCode);
     }
 
-    prepareUnitPage(){
+    prepareUnitPage() {
         var userUnitCode = sessionStorage.getItem('userUnitCode');
-        if(userUnitCode.split('|').length ==5){
+        if (userUnitCode.split('|').length == 5) {
             document.querySelector('#btnUpdateUnit').classList.remove('d-none');
             document.querySelector('#valueUnitDetail').value = sessionStorage.getItem('unitDetail');
         }
     }
 
     initEvent() {
-        document.querySelector('#btnUpdateUnit').addEventListener('click',()=>{
+        document.querySelector('#btnUpdateUnit').addEventListener('click', () => {
             document.querySelector('.dialog').classList.add('d-block');
         })
-        document.querySelector('.close-from').addEventListener('click',()=>{
+        document.querySelector('.close-from').addEventListener('click', () => {
             document.querySelector('.dialog').classList.remove('d-block');
         })
         document.querySelector(".search-box").addEventListener("keypress", (e) => {
@@ -49,31 +72,36 @@ class ManagerEpidemicSituation extends Base {
             this.setToParentUnit();
             this.loadListUnit(this.unitCode);
         })
-        document.querySelector('#btnConfirmUpdate').addEventListener('click',()=>{
+        document.querySelector('#btnConfirmUpdate').addEventListener('click', () => {
             let input1 = document.querySelector('#lastUpdateCases');
             let input2 = document.querySelector('#lastUpdateDeaths');
             let input3 = document.querySelector('#lastUpdateRecovereds');
-            if(input1.value < 0 ){
-                showToastMessenger('danger',"Không nhận dữ liệu âm!");
+            if (input1.value < 0) {
+                showToastMessenger('danger', "Không nhận dữ liệu âm!");
                 input1.focus();
-            }else if(input2.value<0){
-                showToastMessenger('danger',"Không nhận dữ liệu âm!");
+            } else if (input2.value < 0) {
+                showToastMessenger('danger', "Không nhận dữ liệu âm!");
                 input2.focus();
-            }else if(input3.value<0){
-                showToastMessenger('danger',"Không nhận dữ liệu âm!");
+            } else if (input3.value < 0) {
+                showToastMessenger('danger', "Không nhận dữ liệu âm!");
                 input3.focus();
-            }else{
+            } else {
                 let body = {
                     lastUpdateCases: Number(input1.value),
-                    lastUpdateDeaths: Number(input2.value) ,
-                    lastUpdateRecovereds: Number(input3.value) 
+                    lastUpdateDeaths: Number(input2.value),
+                    lastUpdateRecovereds: Number(input3.value)
                 };
-                unitApi.update(body, sessionStorage.getItem('userUnitCode')).then(res=>{
+                let today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                db.collection("your-collection-name").add({ ...body, date: today});
+
+                unitApi.update(body, sessionStorage.getItem('userUnitCode')).then(res => {
                     console.log(res);
                     showToastMessenger('success', "Cập nhật thành công!");
                     this.loadListUnit(this.unitCode);
                     document.querySelector('.dialog').classList.remove('d-block');
-                }).catch(error=>{
+                }).catch(error => {
                     console.log(error);
                     showToastMessenger('danger', "Cập nhật thất bại. Vui lòng thử lại sau!");
                     document.querySelector('.dialog').classList.remove('d-block');

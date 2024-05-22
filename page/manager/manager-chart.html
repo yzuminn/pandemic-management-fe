@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/layout/main-layout.css">
     <link rel="stylesheet" href="../../css/layout/cilivian-epidemic-situation.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
 </head>
 
 <body>
@@ -31,7 +40,7 @@
                 <i class="fas fa-clipboard-check"></i>
                 <p>Duyệt tài khoản</p>
             </div>
-            <div id="cilivianSituation" class="menu-item menu-item-active" toHref="manager-epidemic-situation"
+            <div id="cilivianSituation" class="menu-item" toHref="manager-epidemic-situation"
                 title="Tình hình dịch bệnh">
                 <i class="fas fa-globe-asia"></i>
                 <p>Tình hình dịch</p>
@@ -40,7 +49,7 @@
                 <i class="fas fa-map"></i>
                 <p>Bản đồ dịch</p>
             </div>
-            <div id="cilivianChart" class="menu-item" toHref="manager-chart">
+            <div id="cilivianChart" class="menu-item menu-item-active" toHref="manager-chart">
                 <i class="fas fa-chart-line"></i>
                 <p>Biểu đồ dịch</p>
             </div>
@@ -53,7 +62,8 @@
         <div class="content-header">
             <div class="content-header-left">
                 <i class="fas fa-user-cog"></i>
-                <h2>|</h2><h2 id="unitDetail"></h2>
+                <h2>|</h2>
+                <h2 id="unitDetail"></h2>
             </div>
             <div class="content-header-right">
                 <div class="notification">
@@ -72,72 +82,9 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="content-body">
-            <div class="function-bar">
-                <span>
-                    <h4 style="font-size: 16px;">Trong nước</h4>
-                </span>
-                <span>
-                    <button class="button button-primary d-none" id="btnUpdateUnit">
-                        <i class="fas fa-edit"></i>
-                        Cập nhật đơn vị mình
-                    </button>
-                    <input type="text" class="input search-box" placeholder="Tìm theo tên đơn vị">
-                    <button class="button button-secondary button-icon" id="btnReturn">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <button class="button button-secondary button-icon" id="btnRefresh">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </span>
-            </div>
-            <div class="content-content">
-                <div class="grid">
-                    <table>
-
-                    </table>
-                </div>
-                <div class="paging-bar">
-                    <div class="paging-bar-left">
-                        <p id="pagingInfo">11</p>
-                    </div>
-                    <div class="paging-bar-right">
-                        <div class="dropdown last-dropdown" style="border:none;">
-                            <button class="dropdown-main">
-                                <p>100</p>
-                                <div class="icon"><i class="fas fa-chevron-down"></i></div>
-                            </button>
-                            <div class="dropdown-data">
-                                <div class="dropdown-item" valuename="200">
-                                    <i class="fas fa-check"></i>
-                                    <p>200</p>
-                                </div>
-                                <div class="dropdown-item item-selected" valuename="100">
-                                    <i class="fas fa-check"></i>
-                                    <p>100</p>
-                                </div>
-                                <div class="dropdown-item" valuename="50">
-                                    <i class="fas fa-check"></i>
-                                    <p>50</p>
-                                </div>
-                                <div class="dropdown-item" valuename="20">
-                                    <i class="fas fa-check"></i>
-                                    <p>20</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p>bản ghi/trang</p>
-
-                        <button class="pre-page">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="next-page">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div id="chartContainer" style="width: calc(100% - 60px); height: calc(100% - 260px); margin: 30px;"></div>
         </div>
     </div>
 
@@ -195,14 +142,12 @@
         <div class="loader-icon"></div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
     <script src="../../js/model/tableColums.js"></script>
     <script src="../../js/common/common.js"></script>
     <script src="../../api/BaseApi.js"></script>
     <script src="../../api/UnitApi.js"></script>
     <script src="../../js/page/base.js"></script>
-    <script src="../../js/page/manager/managerEpidemicSituation.js"></script>
+    <script src="../../js/page/manager/managerChart.js"></script>
 </body>
 
 </html>
